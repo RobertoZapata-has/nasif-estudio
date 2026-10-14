@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.className += " js";</script>
 <style>
   :root{
     --bg:#FAF9F5;
@@ -176,28 +177,72 @@
   .estudio figure img{width:100%;border-radius:2px;box-shadow:0 18px 40px -18px rgba(28,28,25,.45);}
   .estudio figcaption{font-size:13px;color:var(--ink-soft);margin-top:10px;}
   .estudio .txt p{max-width:58ch;}
-  .facts{margin:30px 0 0;padding:0;border-top:1px solid var(--line);max-width:460px;}
-  .facts div{display:flex;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--line);font-size:15px;}
-  .facts dt{color:var(--ink-soft);}
-  .facts dd{margin:0;font-weight:600;text-align:right;}
   @media(min-width:860px){
     .estudio{flex-direction:row;align-items:center;}
     .estudio figure{flex:0 0 46%;margin:0 64px 0 0;}
     .estudio .txt{flex:1;}
   }
 
-  /* areas */
-  .areas{display:flex;flex-direction:column;}
-  .area{padding:26px 0;border-top:1px solid var(--line);}
-  .area h3{font-size:21px;margin-bottom:10px;}
-  .area p{color:var(--ink-soft);font-size:15.5px;max-width:46ch;margin:0;}
-  @media(min-width:700px){
-    .areas{flex-direction:row;}
-    .area{flex:1;padding-right:36px;}
-    .area + .area{border-left:1px solid var(--line);padding-left:36px;}
+  /* estado en vivo (pantalla "Adelante") */
+  .status{display:inline-flex;align-items:center;font-size:13.5px;color:#D9D3C4;margin:-12px 0 26px;}
+  .status .dot{width:8px;height:8px;border-radius:50%;background:#8A8F96;margin-right:9px;flex-shrink:0;}
+  .status.open .dot{background:#7FC29B;box-shadow:0 0 0 4px rgba(127,194,155,.2);}
+  .b-ctas{display:flex;flex-direction:column;align-items:center;}
+  .b-link{
+    margin-top:16px;color:#E4DFD2;font-size:14.5px;text-decoration:underline;
+    text-underline-offset:4px;text-decoration-color:rgba(228,223,210,.45);
+  }
+  .b-link:hover{color:#fff;}
+
+  /* ¿en qué te podemos ayudar? */
+  .lede{color:var(--ink-soft);max-width:56ch;margin:0 0 34px;}
+  .guia{display:flex;flex-direction:column;}
+  .opciones{border-top:1px solid var(--line);}
+  .opt{
+    display:block;width:100%;text-align:left;background:none;border:none;
+    border-bottom:1px solid var(--line);padding:16px 18px 16px 20px;
+    font:inherit;font-size:16px;line-height:1.4;color:var(--ink);cursor:pointer;position:relative;
+    transition:background .2s,color .2s;
+  }
+  .opt:hover{background:var(--bg-tint);}
+  .opt::before{content:"";position:absolute;left:0;top:12px;bottom:12px;width:3px;background:transparent;}
+  .opt small{display:block;font-size:13px;color:var(--ink-soft);margin-top:3px;}
+  .opt[aria-pressed="true"]{background:var(--accent-dark);color:#fff;}
+  .opt[aria-pressed="true"]::before{background:var(--brass);}
+  .opt[aria-pressed="true"] small{color:#B9C8BF;}
+
+  .resultado{
+    margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:4px;
+    padding:28px 26px;scroll-margin-top:84px;
+  }
+  .vacio p{color:var(--ink-soft);margin:0;max-width:40ch;}
+  .lleno.in{animation:aparecer .35s ease-out;}
+  @keyframes aparecer{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+  .area-tag{display:inline-block;font-size:13px;font-weight:600;color:var(--brass);margin-bottom:6px;}
+  .lleno h3{font-size:24px;line-height:1.2;margin-bottom:14px;}
+  .primero{border-left:2px solid var(--brass);padding-left:14px;margin:0 0 24px;font-size:15.5px;}
+  .checklist{border-top:1px solid var(--line);padding-top:14px;}
+  .cl-head{display:flex;justify-content:space-between;align-items:baseline;font-size:13.5px;font-weight:600;margin-bottom:4px;}
+  .cl-count{color:var(--accent);font-weight:500;white-space:nowrap;margin-left:12px;}
+  .checklist ul{list-style:none;margin:0;padding:0;}
+  .checklist label{
+    display:flex;align-items:flex-start;padding:9px 0;cursor:pointer;font-size:15px;line-height:1.45;
+    border-bottom:1px dashed var(--line);
+  }
+  .checklist input{width:18px;height:18px;margin:2px 12px 0 0;accent-color:var(--accent);flex-shrink:0;}
+  .checklist li.ok span{color:var(--ink-soft);text-decoration:line-through;text-decoration-color:rgba(101,98,91,.5);}
+  .quien{font-size:14.5px;color:var(--ink-soft);margin:20px 0 22px;}
+  .quien b{color:var(--ink);font-weight:600;}
+  .r-ctas{display:flex;flex-wrap:wrap;align-items:center;}
+  .r-ctas > *{margin:0 22px 10px 0;}
+  .aviso{font-size:13px;color:var(--ink-soft);margin:24px 0 0;max-width:62ch;}
+  @media(min-width:900px){
+    .guia{flex-direction:row;align-items:flex-start;}
+    .opciones{flex:0 0 44%;}
+    .resultado{flex:1;margin:0 0 0 40px;position:sticky;top:90px;}
   }
 
-  /* equipo */
+  /* equipo: banda con la biblioteca */
   .equipo-band{
     position:relative;height:250px;overflow:hidden;
     display:flex;align-items:flex-end;
@@ -214,13 +259,39 @@
   .equipo-band .wrap{position:relative;z-index:1;width:100%;max-width:1048px;padding-bottom:34px;color:#fff;}
   .equipo-band h2{font-size:clamp(30px, 4vw, 42px);color:#fff;}
   .equipo-band p{margin:8px 0 0;color:#D5DDD7;font-size:15px;}
-  .equipo-grid{display:flex;flex-wrap:wrap;justify-content:space-between;max-width:1000px;margin:0 auto;}
-  .persona{width:100%;padding:28px 0;border-bottom:1px solid var(--line);}
-  .persona h3{font-size:20px;margin-bottom:4px;}
-  .persona .role{font-size:14px;color:var(--accent);font-weight:600;margin-bottom:5px;}
-  .persona .cred{font-size:14px;color:var(--ink-soft);margin-bottom:8px;}
-  .persona .bio{font-size:15px;margin:0;max-width:52ch;}
-  @media(min-width:760px){ .persona{width:46%;} }
+
+  /* historia año por año */
+  .historia{padding-top:40px;}
+  .hist-grid{display:flex;flex-direction:column;}
+  .anio-col{
+    position:sticky;top:66px;z-index:2;background:var(--bg);
+    margin:0 -24px;padding:12px 24px 10px;border-bottom:1px solid var(--line);
+  }
+  .anio{
+    font-family:var(--serif);font-weight:600;font-size:54px;line-height:1;
+    color:var(--accent-dark);font-variant-numeric:lining-nums tabular-nums;
+  }
+  html:not(.js) .anio-col{display:none;}
+  .hitos{list-style:none;margin:0;padding:0;}
+  .hito{padding:36px 0;border-bottom:1px solid var(--line);transition:opacity .45s;}
+  html.js .hito.dim{opacity:.3;}
+  .h-y{display:block;font-family:var(--serif);font-size:20px;color:var(--brass);margin-bottom:6px;}
+  html.js .h-y{display:none;}
+  .hito h3{font-size:23px;line-height:1.2;margin-bottom:6px;}
+  .h-rol{color:var(--accent);font-weight:600;font-size:14.5px;margin:0 0 8px;}
+  .hito p{margin:0 0 8px;max-width:50ch;}
+  .h-mat{font-size:13.5px;color:var(--ink-soft);}
+  .hito-hito h3{font-size:30px;}
+  .hito .btn{margin-top:12px;}
+  @media(min-width:860px){
+    .hist-grid{flex-direction:row;align-items:flex-start;}
+    .anio-col{flex:0 0 42%;top:calc(50vh - 80px);margin:0;padding:0;border:none;background:none;}
+    .anio{font-size:clamp(100px, 11vw, 156px);letter-spacing:-2px;}
+    .hitos{flex:1;}
+    .hito{padding:10vh 0;border-bottom:none;}
+    .hito:first-child{padding-top:24vh;}
+    .hito:last-child{padding-bottom:22vh;}
+  }
 
   /* turno */
   .turno p{color:var(--ink-soft);max-width:50ch;}
@@ -278,8 +349,8 @@
       <span class="wm-a">&amp; ASOCIADOS</span>
     </a>
     <nav class="links">
+      <a href="#consulta">Tu consulta</a>
       <a href="#nosotros">El estudio</a>
-      <a href="#areas">Áreas</a>
       <a href="#equipo">Equipo</a>
       <a href="#contacto">Contacto</a>
       <a href="#turno" class="pill">Sacar turno</a>
@@ -288,8 +359,8 @@
   </div>
 </header>
 <div class="mobile-menu" id="mobileMenu">
+  <a href="#consulta">Tu consulta</a>
   <a href="#nosotros">El estudio</a>
-  <a href="#areas">Áreas</a>
   <a href="#equipo">Equipo</a>
   <a href="#turno">Sacar turno</a>
   <a href="#contacto">Contacto</a>
@@ -318,13 +389,59 @@
     <div class="copy-b" id="copyB">
       <h2>Adelante.</h2>
       <p>Atendemos con cita previa, de lunes a viernes de 18 a 21 hs.</p>
-      <a href="#turno" class="btn-light">Sacar un turno</a>
+      <div class="status" id="status"><span class="dot"></span><span id="statusTxt"></span></div>
+      <div class="b-ctas">
+        <a href="#turno" class="btn-light">Sacar un turno</a>
+        <a href="#consulta" class="b-link">o contanos qué te pasa</a>
+      </div>
     </div>
   </div>
 </section>
 
+<!-- ============ ¿EN QUÉ TE PODEMOS AYUDAR? ============ -->
+<section class="s consulta" id="consulta">
+  <div class="wrap">
+    <span class="kicker"></span>
+    <h2 class="title">¿En qué te podemos ayudar?</h2>
+    <p class="lede">Elegí lo que más se parezca a tu situación. Te contamos qué conviene traer a la primera consulta, para aprovechar bien los 30 minutos.</p>
+
+    <div class="guia">
+      <div class="opciones" id="opciones" role="list"></div>
+
+      <div class="resultado" id="resultado" aria-live="polite">
+        <div class="vacio" id="vacio">
+          <p>Elegí una opción y acá vas a ver el área que corresponde, quién del equipo se especializa en eso y la lista de lo que conviene traer.</p>
+        </div>
+        <div class="lleno" id="lleno" hidden>
+          <span class="area-tag" id="rArea"></span>
+          <h3 id="rTitulo"></h3>
+          <p class="primero" id="rPrimero"></p>
+
+          <div class="checklist">
+            <div class="cl-head">
+              <span>Qué traer a la primera consulta</span>
+              <span class="cl-count" id="rCount"></span>
+            </div>
+            <ul id="rLista"></ul>
+          </div>
+
+          <p class="quien" id="rQuien"></p>
+
+          <div class="r-ctas">
+            <a href="#turno" class="btn">Reservar consulta</a>
+            <a href="#" class="wa-inline" id="rWa" target="_blank" rel="noopener">Consultar por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="aviso">Esta guía es orientativa: cada caso es distinto y solo puede evaluarse en la consulta, con la documentación a la vista.</p>
+    <noscript><p class="aviso">Para usar la guía, activá JavaScript en tu navegador. También podés reservar tu turno más abajo.</p></noscript>
+  </div>
+</section>
+
 <!-- ============ EL ESTUDIO ============ -->
-<section class="s" id="nosotros">
+<section class="s tint" id="nosotros">
   <div class="estudio">
     <figure>
       <img src="img/placa.jpg" alt="Placa de bronce: Estudio Jurídico Dr. Juan Carlos E. Nasif y Asociados" loading="lazy">
@@ -335,78 +452,77 @@
       <h2 class="title">Sobre el estudio</h2>
       <p>Fundado en 1998 por el Dr. Juan Carlos Elías Nasif, el Estudio Jurídico Nasif &amp; Asociados trabaja desde entonces con ética y capacidad en la defensa de los derechos de sus clientes.</p>
       <p>Con el correr de los años fue sumando profesionales, y hoy continúa especializado principalmente en las ramas del Derecho Civil y Laboral.</p>
-      <dl class="facts">
-        <div><dt>Fundación</dt><dd>1998</dd></div>
-        <div><dt>Abogados matriculados</dt><dd>5</dd></div>
-        <div><dt>Atención</dt><dd>Con cita previa</dd></div>
-      </dl>
     </div>
   </div>
 </section>
 
-<!-- ============ ÁREAS ============ -->
-<section class="s tint" id="areas">
-  <div class="wrap">
-    <span class="kicker"></span>
-    <h2 class="title">Áreas de práctica</h2>
-    <div class="areas">
-      <div class="area">
-        <h3>Derecho Civil</h3>
-        <p>Asesoramiento y patrocinio jurídico en asuntos de derecho civil, con más de dos décadas de trayectoria ante los tribunales de la provincia.</p>
-      </div>
-      <div class="area">
-        <h3>Derecho Laboral</h3>
-        <p>Representación y asesoramiento en cuestiones del derecho del trabajo, tanto para trabajadores como para empleadores.</p>
-      </div>
-    </div>
-  </div>
-  <!-- PENDIENTE: reemplazar por el detalle específico cuando vuelva el checklist de áreas -->
-</section>
-
-<!-- ============ EQUIPO ============ -->
+<!-- ============ EQUIPO: la historia año por año ============ -->
 <section id="equipo">
   <div class="equipo-band">
     <div class="bg"></div>
     <div class="wrap">
-      <h2>El equipo</h2>
+      <h2>El equipo, año por año</h2>
       <p>Cinco abogados matriculados en la provincia de Mendoza.</p>
     </div>
   </div>
-  <div class="s" style="padding-top:28px;">
-    <div class="equipo-grid">
-      <div class="persona">
-        <h3>Juan Carlos Elías Nasif</h3>
-        <div class="role">Abogado, fundador del estudio</div>
-        <div class="cred">Matrícula 3986. Universidad de Mendoza, 1992.</div>
-        <p class="bio">Especialista en Derecho Civil. Trayectoria de 15 años en el Poder Judicial y más de 30 años de ejercicio independiente.</p>
+
+  <div class="s historia">
+    <div class="wrap hist-grid">
+      <div class="anio-col">
+        <div class="anio" id="anio" aria-hidden="true">1992</div>
       </div>
-      <div class="persona">
-        <h3>Juan Ignacio Nasif</h3>
-        <div class="role">Abogado</div>
-        <div class="cred">Matrícula 10398. Universidad del Aconcagua, 2018.</div>
-        <p class="bio">Maestrando en Derecho Laboral.</p>
-      </div>
-      <div class="persona">
-        <h3>Juan Andrés Nasif</h3>
-        <div class="role">Abogado, socio</div>
-        <div class="cred">Matrícula 11997. Universidad del Aconcagua, 2021.</div>
-        <p class="bio">Especialista en Derecho Civil. Maestrando en Magistratura y Gestión Judicial.</p>
-      </div>
-      <div class="persona">
-        <h3>Gonzalo Sadler</h3>
-        <div class="role">Abogado</div>
-        <div class="cred">Matrícula 12933. Universidad del Aconcagua, 2024.</div>
-        <p class="bio">Especialista en Derecho de Familia.</p>
-      </div>
-      <div class="persona">
-        <h3>Francisco Fuentes</h3>
-        <div class="role">Abogado</div>
-        <div class="cred">Matrícula 12916. Universidad del Aconcagua, 2025.</div>
-        <p class="bio">Actualmente cursa el profesorado de enseñanza universitaria.</p>
-      </div>
+      <ol class="hitos" id="hitos">
+        <li class="hito" data-y="1992">
+          <span class="h-y">1992</span>
+          <h3>Juan Carlos Elías Nasif</h3>
+          <p class="h-rol">Se recibe de abogado en la Universidad de Mendoza.</p>
+          <p>Especialista en Derecho Civil, suma una trayectoria de 15 años en el Poder Judicial y más de 30 años de ejercicio independiente.</p>
+          <p class="h-mat">Matrícula 3986</p>
+        </li>
+        <li class="hito hito-hito" data-y="1998">
+          <span class="h-y">1998</span>
+          <h3>Nace el estudio</h3>
+          <p>El Dr. Juan Carlos Elías Nasif funda el Estudio Jurídico Nasif &amp; Asociados, con foco en Derecho Civil y Laboral.</p>
+        </li>
+        <li class="hito" data-y="2018">
+          <span class="h-y">2018</span>
+          <h3>Juan Ignacio Nasif</h3>
+          <p class="h-rol">Se recibe en la Universidad del Aconcagua.</p>
+          <p>Maestrando en Derecho Laboral.</p>
+          <p class="h-mat">Matrícula 10398</p>
+        </li>
+        <li class="hito" data-y="2021">
+          <span class="h-y">2021</span>
+          <h3>Juan Andrés Nasif</h3>
+          <p class="h-rol">Se recibe en la Universidad del Aconcagua. Hoy es socio del estudio.</p>
+          <p>Especialista en Derecho Civil. Maestrando en Magistratura y Gestión Judicial.</p>
+          <p class="h-mat">Matrícula 11997</p>
+        </li>
+        <li class="hito" data-y="2024">
+          <span class="h-y">2024</span>
+          <h3>Gonzalo Sadler</h3>
+          <p class="h-rol">Se recibe en la Universidad del Aconcagua.</p>
+          <p>Especialista en Derecho de Familia.</p>
+          <p class="h-mat">Matrícula 12933</p>
+        </li>
+        <li class="hito" data-y="2025">
+          <span class="h-y">2025</span>
+          <h3>Francisco Fuentes</h3>
+          <p class="h-rol">Se recibe en la Universidad del Aconcagua.</p>
+          <p>Actualmente cursa el profesorado de enseñanza universitaria.</p>
+          <p class="h-mat">Matrícula 12916</p>
+        </li>
+        <li class="hito hito-hito" data-y="hoy">
+          <span class="h-y">Hoy</span>
+          <h3>Cinco abogados, un mismo estudio</h3>
+          <p>Atendemos con cita previa en Necochea 350, Ciudad de Mendoza.</p>
+          <a href="#turno" class="btn">Sacar un turno</a>
+        </li>
+      </ol>
     </div>
   </div>
 </section>
+
 
 <!-- ============ TURNO ============ -->
 <section class="s tint turno" id="turno">
@@ -510,6 +626,160 @@
   document.getElementById('waLink').href = wa;
   document.getElementById('waLinkFooter').href = wa;
 
+  var REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var WA_NUM = '5492615974628';
+
+  /* ---------- Estado en vivo en la pantalla "Adelante" ---------- */
+  (function(){
+    var el = document.getElementById('status'), txt = document.getElementById('statusTxt');
+    if (!el) return;
+    var dia, hora;
+    try {
+      var f = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Argentina/Mendoza', weekday: 'short', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+      f.forEach(function(x){ if (x.type === 'weekday') dia = x.value; if (x.type === 'hour') hora = parseInt(x.value, 10); });
+    } catch (e) { el.style.display = 'none'; return; }
+    var habil = ['Mon','Tue','Wed','Thu','Fri'].indexOf(dia) !== -1;
+    if (habil && hora >= 18 && hora < 21) {
+      el.classList.add('open');
+      txt.textContent = 'Estás dentro del horario de atención.';
+    } else {
+      txt.textContent = 'Fuera de horario: podés reservar tu turno online ahora mismo.';
+    }
+  })();
+
+  /* ---------- ¿En qué te podemos ayudar? ---------- */
+  var EQUIPO = {
+    laboral: 'En el equipo, <b>Juan Ignacio Nasif</b> es maestrando en Derecho Laboral.',
+    civil:   'En el equipo, <b>Juan Carlos Elías Nasif</b> y <b>Juan Andrés Nasif</b> son especialistas en Derecho Civil.',
+    familia: 'En el equipo, <b>Gonzalo Sadler</b> es especialista en Derecho de Familia.',
+    general: 'Lo vemos en la consulta y te orientamos con quien corresponda dentro del equipo.'
+  };
+  // PENDIENTE: validar estas situaciones con el checklist de áreas que completa el estudio.
+  var SITUACIONES = [
+    { id:'despido', t:'Me despidieron o tengo un problema en el trabajo',
+      s:'Despidos, telegramas, trabajo no registrado, diferencias de sueldo',
+      area:'Derecho Laboral', eq:'laboral',
+      p:'Si recibiste un telegrama o una carta documento, no respondas ni firmes nada sin asesorarte: algunos plazos son breves.',
+      l:['DNI','Recibos de sueldo (los que tengas)','Telegramas o cartas documento enviados o recibidos','Contrato o constancia de alta, si tenés','Mensajes, fotos o comprobantes de horarios y tareas'] },
+    { id:'art', t:'Tuve un accidente de trabajo o una enfermedad laboral',
+      s:'ART, accidentes en el trabajo o en el trayecto',
+      area:'Derecho Laboral', eq:'laboral',
+      p:'Guardá toda la documentación médica desde el primer día, aunque parezca menor.',
+      l:['DNI','Datos de la ART y número de siniestro, si lo tenés','Certificados, estudios y altas médicas','Recibos de sueldo','Constancia de la denuncia del accidente, si la hubo'] },
+    { id:'sucesion', t:'Falleció un familiar y hay bienes o trámites pendientes',
+      s:'Sucesiones, herencias, declaratoria de herederos',
+      area:'Derecho Civil', eq:'civil',
+      p:'Una sucesión sin iniciar puede complicar, años después, la venta de un inmueble o de un vehículo.',
+      l:['DNI','Partida de defunción','Partidas que acrediten el vínculo (nacimiento, matrimonio)','Escrituras o títulos de los bienes','Datos de vehículos o cuentas, si los hubiera'] },
+    { id:'danos', t:'Tuve un accidente de tránsito o sufrí un daño',
+      s:'Daños y perjuicios, reclamos a aseguradoras',
+      area:'Derecho Civil', eq:'civil',
+      p:'Antes de aceptar un ofrecimiento de una aseguradora, conviene que lo revise un abogado.',
+      l:['DNI','Datos del seguro y número de póliza','Denuncia o acta, si se hizo','Fotos, presupuestos o facturas de reparación','Certificados médicos, si hubo lesiones'] },
+    { id:'alquiler', t:'Tengo un problema con un alquiler o una propiedad',
+      s:'Contratos, desalojos, deudas, escrituración',
+      area:'Derecho Civil', eq:'civil',
+      p:'Los mensajes y cartas con la otra parte suelen ser importantes: no los borres.',
+      l:['DNI','Contrato de alquiler o boleto de compraventa','Recibos o comprobantes de pago','Mensajes, cartas o intimaciones','Escritura o título, si sos propietario'] },
+    { id:'familia', t:'Separación, cuota alimentaria u otro tema de familia',
+      s:'Divorcio, alimentos, régimen de comunicación',
+      area:'Derecho de Familia', eq:'familia',
+      p:'Si hubo acuerdos de palabra, traé lo que tengas por escrito, aunque sea informal.',
+      l:['DNI','Partida de matrimonio, si corresponde','Partidas de nacimiento de los hijos','Acuerdos previos, si los hubo','Comprobantes de gastos de los hijos'] },
+    { id:'otro', t:'Otra situación',
+      s:'No encuentro la mía en la lista',
+      area:'Consulta general', eq:'general',
+      p:'Si no sabés por dónde empezar, está bien: para eso es la primera consulta.',
+      l:['DNI','Toda la documentación relacionada con el tema','Una lista con las fechas y los hechos principales, en orden'] }
+  ];
+
+  (function(){
+    var cont = document.getElementById('opciones');
+    if (!cont) return;
+    var vacio = document.getElementById('vacio'), lleno = document.getElementById('lleno');
+    var rArea = document.getElementById('rArea'), rTitulo = document.getElementById('rTitulo');
+    var rPrimero = document.getElementById('rPrimero'), rLista = document.getElementById('rLista');
+    var rCount = document.getElementById('rCount'), rQuien = document.getElementById('rQuien');
+    var rWa = document.getElementById('rWa'), resultado = document.getElementById('resultado');
+
+    function esc(s){ return String(s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+
+    cont.innerHTML = SITUACIONES.map(function(x){
+      return '<button type="button" class="opt" role="listitem" aria-pressed="false" data-id="' + x.id + '">'
+        + esc(x.t) + '<small>' + esc(x.s) + '</small></button>';
+    }).join('');
+
+    function contar(){
+      var cbs = rLista.querySelectorAll('input'), n = 0;
+      cbs.forEach(function(c){ if (c.checked) n++; c.closest('li').classList.toggle('ok', c.checked); });
+      rCount.textContent = n === cbs.length ? 'Todo listo' : n + ' de ' + cbs.length + ' listos';
+    }
+
+    function elegir(id, desdeClick){
+      var x = SITUACIONES.filter(function(s){ return s.id === id; })[0];
+      if (!x) return;
+      cont.querySelectorAll('.opt').forEach(function(b){ b.setAttribute('aria-pressed', b.dataset.id === id ? 'true' : 'false'); });
+      rArea.textContent = x.area;
+      rTitulo.textContent = x.t;
+      rPrimero.textContent = x.p;
+      rLista.innerHTML = x.l.map(function(item, i){
+        return '<li><label><input type="checkbox" id="cl' + i + '"><span>' + esc(item) + '</span></label></li>';
+      }).join('');
+      rLista.querySelectorAll('input').forEach(function(c){ c.addEventListener('change', contar); });
+      contar();
+      rQuien.innerHTML = EQUIPO[x.eq];
+      rWa.href = 'https://wa.me/' + WA_NUM + '?text=' + encodeURIComponent('Hola, quisiera hacer una consulta sobre: ' + x.t.toLowerCase() + '.');
+      vacio.hidden = true;
+      lleno.hidden = false;
+      lleno.classList.remove('in'); void lleno.offsetWidth; lleno.classList.add('in');
+      // En celular el resultado queda debajo de la lista: lo acercamos
+      if (desdeClick && window.innerWidth < 900) {
+        resultado.scrollIntoView({ behavior: REDUCE ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+
+    cont.addEventListener('click', function(e){
+      var b = e.target.closest('.opt');
+      if (b) elegir(b.dataset.id, true);
+    });
+  })();
+
+  /* ---------- Historia: el año grande acompaña la lectura ---------- */
+  (function(){
+    var anioEl = document.getElementById('anio');
+    var hitos = document.querySelectorAll('.hito');
+    if (!anioEl || !hitos.length || !('IntersectionObserver' in window)) return;
+    var actual = 1992, anim = null;
+    var HOY = new Date().getFullYear();
+
+    function mostrar(destino){
+      if (destino === actual) return;
+      if (anim) cancelAnimationFrame(anim);
+      if (REDUCE) { actual = destino; anioEl.textContent = destino; return; }
+      var desde = actual, t0 = null, dur = 650;
+      function paso(ts){
+        if (!t0) t0 = ts;
+        var k = Math.min(1, (ts - t0) / dur);
+        var e = 1 - Math.pow(1 - k, 3);
+        anioEl.textContent = Math.round(desde + (destino - desde) * e);
+        if (k < 1) anim = requestAnimationFrame(paso); else { actual = destino; anim = null; }
+      }
+      anim = requestAnimationFrame(paso);
+    }
+
+    function activar(li){
+      hitos.forEach(function(h){ h.classList.toggle('dim', h !== li); });
+      var y = li.dataset.y === 'hoy' ? HOY : parseInt(li.dataset.y, 10);
+      mostrar(y);
+    }
+
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if (en.isIntersecting) activar(en.target); });
+    }, { rootMargin: '-45% 0px -45% 0px' });
+    hitos.forEach(function(h){ io.observe(h); });
+    activar(hitos[0]);
+  })();
+
   /* ---------- DOLLY: el scroll acerca la cámara a la puerta ---------- */
   var nav   = document.getElementById('nav');
   var sec   = document.querySelector('.dolly');
@@ -527,7 +797,7 @@
   var DOOR = { x: 0.171, y: 0.46 };
   var RATIO = 1932 / 2576; // ancho / alto de la foto original
 
-  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var reduce = REDUCE;
   var vw, vh, w, h, ox, oy, d0x, d0y, maxScale, ticking = false;
 
   function clamp(v, a, b){ return v < a ? a : (v > b ? b : v); }
