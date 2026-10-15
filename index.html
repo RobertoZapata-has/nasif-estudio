@@ -8,11 +8,19 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%232F4A3E'/%3E%3Ctext x='32' y='45' font-family='Georgia,serif' font-size='40' font-weight='bold' fill='%23FAF9F5' text-anchor='middle'%3EN%3C/text%3E%3C/svg%3E">
 <link rel="preload" as="image" href="img/entrada.jpg" media="(min-width: 700px)">
 <link rel="preload" as="image" href="img/entrada-m.jpg" media="(max-width: 699px)">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preload" as="font" type="font/woff2" href="fonts/brygada-1918.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="fonts/archivo.woff2" crossorigin>
 <script>document.documentElement.className += " js";</script>
 <style>
+  /* Tipografías alojadas en el propio sitio (licencia SIL Open Font License) */
+  @font-face{
+    font-family:'Brygada 1918';src:url('fonts/brygada-1918.woff2') format('woff2');
+    font-weight:400 700;font-style:normal;font-display:swap;
+  }
+  @font-face{
+    font-family:'Archivo';src:url('fonts/archivo.woff2') format('woff2');
+    font-weight:100 900;font-stretch:62% 125%;font-style:normal;font-display:swap;
+  }
   :root{
     --bg:#FAF9F5;
     --bg-tint:#F2F4EF;
@@ -23,8 +31,9 @@
     --brass:#A98A4A;
     --line:#E4E0D5;
     --night:#11151A;
-    --serif:'Playfair Display',Georgia,'Times New Roman',serif;
-    --sans:'IBM Plex Sans','Segoe UI',Arial,sans-serif;
+    --serif:'Brygada 1918',Georgia,'Times New Roman',serif;
+    --sans:'Archivo','Segoe UI',Arial,sans-serif;
+    --nav:78px;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
@@ -43,44 +52,66 @@
   /* ================= NAV ================= */
   .site-nav{
     position:fixed;top:0;left:0;right:0;z-index:60;
-    color:#F4F1EA;
-    background:linear-gradient(to bottom, rgba(10,12,15,.55), rgba(10,12,15,0));
+    color:#F7F4EC;
     transition:background .35s, color .35s, border-color .35s;
     border-bottom:1px solid transparent;
   }
+  /* sombra oscura detrás de la barra mientras está sobre la foto */
+  .site-nav::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:190%;pointer-events:none;z-index:-1;
+    background:linear-gradient(to bottom, rgba(8,10,13,.82) 0%, rgba(8,10,13,.55) 45%, rgba(8,10,13,0) 100%);
+    transition:opacity .35s;
+  }
+  .site-nav:not(.solid) .navmark, .site-nav:not(.solid) nav.links a:not(.pill){
+    text-shadow:0 1px 12px rgba(0,0,0,.6);
+  }
   .site-nav.solid{
     color:var(--accent-dark);
-    background:rgba(250,249,245,.94);
+    background:rgba(250,249,245,.96);
     backdrop-filter:blur(6px);
     border-bottom-color:var(--line);
   }
+  .site-nav.solid::before{opacity:0;}
   .site-nav .wrap{
     display:flex;align-items:center;justify-content:space-between;
-    height:66px;max-width:1120px;
+    height:var(--nav);max-width:1180px;
   }
   .navmark{text-decoration:none;color:inherit;display:block;text-align:center;line-height:1;}
-  .navmark .wm-n{display:block;font-family:var(--serif);font-weight:600;font-size:17px;letter-spacing:3.5px;}
-  .navmark .wm-rule{display:block;height:1px;background:currentColor;opacity:.45;margin:4px 0 3px;}
-  .navmark .wm-a{display:block;font-family:var(--sans);font-weight:500;font-size:7.5px;letter-spacing:2.6px;}
+  .navmark .wm-n{display:block;font-family:var(--serif);font-weight:700;font-size:26px;letter-spacing:5px;margin-right:-5px;}
+  .navmark .wm-rule{display:block;height:1px;background:currentColor;opacity:.55;margin:6px 0 5px;}
+  .navmark .wm-a{
+    display:block;font-family:var(--sans);font-stretch:75%;font-weight:600;
+    font-size:10.5px;letter-spacing:3.2px;margin-right:-3.2px;
+  }
 
   nav.links{display:none;align-items:center;}
   nav.links a{
-    color:inherit;opacity:.85;text-decoration:none;font-size:14.5px;margin-left:28px;
+    color:inherit;text-decoration:none;font-size:16px;font-weight:500;margin-left:30px;
+    padding:6px 0;border-bottom:1px solid transparent;
   }
-  nav.links a:hover{opacity:1;}
+  nav.links a:not(.pill):hover{border-bottom-color:currentColor;}
   nav.links a.pill{
-    opacity:1;border:1px solid currentColor;border-radius:4px;padding:7px 14px;
+    background:#F7F4EC;color:var(--accent-dark);border:none;border-bottom:none;
+    border-radius:4px;padding:11px 20px;font-weight:600;margin-left:34px;
   }
+  .site-nav.solid nav.links a.pill{background:var(--accent);color:#fff;}
+  nav.links a.pill:hover{filter:brightness(1.06);}
   .burger{
-    background:none;border:1px solid currentColor;color:inherit;border-radius:6px;
-    width:40px;height:40px;font-size:16px;cursor:pointer;opacity:.85;
+    background:rgba(8,10,13,.25);border:1.5px solid currentColor;color:inherit;border-radius:6px;
+    width:46px;height:46px;font-size:19px;cursor:pointer;
   }
+  .site-nav.solid .burger{background:none;}
   .mobile-menu{
-    display:none;position:fixed;top:66px;left:0;right:0;z-index:59;
+    display:none;position:fixed;top:var(--nav);left:0;right:0;z-index:59;
     flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);
   }
   .mobile-menu.open{display:flex;}
-  .mobile-menu a{color:var(--ink);text-decoration:none;padding:15px 24px;border-top:1px solid var(--line);font-size:15.5px;}
+  .mobile-menu a{color:var(--ink);text-decoration:none;padding:16px 24px;border-top:1px solid var(--line);font-size:17px;}
+  @media(max-width:779px){
+    :root{--nav:70px;}
+    .navmark .wm-n{font-size:22px;letter-spacing:4.4px;margin-right:-4.4px;}
+    .navmark .wm-a{font-size:9.5px;letter-spacing:2.8px;margin-right:-2.8px;}
+  }
   @media(min-width:780px){ nav.links{display:flex;} .burger{display:none;} }
 
   /* ================= DOLLY (entrada) ================= */
@@ -115,7 +146,8 @@
   }
   .copy-a .inner{max-width:1120px;margin:0 auto;}
   .copy-a .addr{
-    font-size:14px;color:#E4DFD2;margin:0 0 14px;text-shadow:0 1px 10px rgba(0,0,0,.75);
+    font-stretch:75%;font-weight:600;text-transform:uppercase;letter-spacing:.14em;
+    font-size:13.5px;color:#E4DFD2;margin:0 0 14px;text-shadow:0 1px 10px rgba(0,0,0,.75);
     display:flex;align-items:center;
   }
   .copy-a .addr::before{
@@ -123,7 +155,7 @@
   }
   .copy-a h1{
     font-size:clamp(36px, 6.4vw, 76px);line-height:1.06;font-weight:600;
-    max-width:14ch;letter-spacing:-.5px;
+    max-width:14ch;letter-spacing:-.2px;
     text-shadow:0 2px 24px rgba(0,0,0,.35);
   }
   @media(min-aspect-ratio:5/4) and (min-width:900px){
@@ -213,12 +245,12 @@
 
   .resultado{
     margin-top:28px;background:#fff;border:1px solid var(--line);border-radius:4px;
-    padding:28px 26px;scroll-margin-top:84px;
+    padding:28px 26px;scroll-margin-top:96px;
   }
   .vacio p{color:var(--ink-soft);margin:0;max-width:40ch;}
   .lleno.in{animation:aparecer .35s ease-out;}
   @keyframes aparecer{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
-  .area-tag{display:inline-block;font-size:13px;font-weight:600;color:var(--brass);margin-bottom:6px;}
+  .area-tag{display:inline-block;font-stretch:75%;font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--brass);margin-bottom:8px;}
   .lleno h3{font-size:24px;line-height:1.2;margin-bottom:14px;}
   .primero{border-left:2px solid var(--brass);padding-left:14px;margin:0 0 24px;font-size:15.5px;}
   .checklist{border-top:1px solid var(--line);padding-top:14px;}
@@ -239,7 +271,7 @@
   @media(min-width:900px){
     .guia{flex-direction:row;align-items:flex-start;}
     .opciones{flex:0 0 44%;}
-    .resultado{flex:1;margin:0 0 0 40px;position:sticky;top:90px;}
+    .resultado{flex:1;margin:0 0 0 40px;position:sticky;top:104px;}
   }
 
   /* equipo: banda con la biblioteca */
@@ -264,7 +296,7 @@
   .historia{padding-top:40px;}
   .hist-grid{display:flex;flex-direction:column;}
   .anio-col{
-    position:sticky;top:66px;z-index:2;background:var(--bg);
+    position:sticky;top:var(--nav);z-index:2;background:var(--bg);
     margin:0 -24px;padding:12px 24px 10px;border-bottom:1px solid var(--line);
   }
   .anio{
@@ -320,9 +352,9 @@
   /* footer */
   footer{background:var(--accent-dark);color:#E3E9E5;padding:64px 24px 34px;}
   .wordmark-footer{display:inline-block;text-align:center;color:#fff;line-height:1;margin-bottom:34px;}
-  .wordmark-footer .wm-n{display:block;font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:4.5px;}
+  .wordmark-footer .wm-n{display:block;font-family:var(--serif);font-weight:700;font-size:23px;letter-spacing:4.5px;}
   .wordmark-footer .wm-rule{display:block;height:1px;background:currentColor;opacity:.4;margin:6px 0 5px;}
-  .wordmark-footer .wm-a{display:block;font-family:var(--sans);font-weight:500;font-size:9px;letter-spacing:3.4px;}
+  .wordmark-footer .wm-a{display:block;font-family:var(--sans);font-stretch:75%;font-weight:600;font-size:10px;letter-spacing:3.4px;}
   .contact-grid{display:flex;flex-wrap:wrap;font-size:14.5px;}
   .contact-grid > div{width:100%;margin-bottom:24px;}
   @media(min-width:680px){ .contact-grid > div{width:23%;margin-right:2.6%;} }
@@ -864,7 +896,7 @@
     copyB.classList.toggle('live', b > 0.5);
 
     // 5. Barra superior: clara sobre las fotos, sólida después
-    nav.classList.toggle('solid', rect.bottom <= 66);
+    nav.classList.toggle('solid', rect.bottom <= nav.offsetHeight);
   }
 
   function onScroll(){ if (!ticking) { ticking = true; requestAnimationFrame(frame); } }
@@ -872,7 +904,7 @@
   if (reduce) {
     // Sin animación: queda la foto de la entrada fija, con el título
     window.addEventListener('scroll', function(){
-      nav.classList.toggle('solid', sec.getBoundingClientRect().bottom <= 66);
+      nav.classList.toggle('solid', sec.getBoundingClientRect().bottom <= nav.offsetHeight);
     }, { passive: true });
     cue.style.display = 'none';
     return;
