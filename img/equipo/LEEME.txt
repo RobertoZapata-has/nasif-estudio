@@ -1,0 +1,13 @@
+FOTOS DEL EQUIPO
+================
+Subí acá cada foto con EXACTAMENTE este nombre y aparece sola en el sitio,
+reemplazando la silueta gris. No hace falta tocar el código.
+
+  juan-carlos-nasif.jpg
+  juan-ignacio-nasif.jpg
+  juan-andres-nasif.jpg
+  gonzalo-sadler.jpg
+  francisco-fuentes.jpg
+
+Recomendado: foto cuadrada, de frente, fondo neutro, al menos 400 x 400 px.
+Que las cinco tengan la misma luz y el mismo fondo para que se vean como equipo.
